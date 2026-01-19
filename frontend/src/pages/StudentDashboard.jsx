@@ -11,7 +11,7 @@ function StudentDashboard() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = '/'; // Redirect if no token
+            window.location.href = '/'; 
             return;
         }
 
@@ -35,7 +35,7 @@ function StudentDashboard() {
         setLoadingAI(true);
 
         try {
-            // Updated to match your main.py endpoint
+            // Updated to match main.py endpoint
             const res = await axios.post(`http://localhost:8000/student/ask-ai-doubt`, { question });
             setChatHistory(prev => [...prev, { role: 'ai', text: res.data.answer }]);
             setQuestion("");
@@ -80,7 +80,7 @@ function StudentDashboard() {
                     </h1>
                 </header>
 
-                {/* --- 1. DASHBOARD VIEW --- */}
+                {/* DASHBOARD VIEW */}
                 {activeTab === 'dashboard' && (
                     <>
                         <div style={styles.topRow}>
@@ -118,7 +118,7 @@ function StudentDashboard() {
                     </>
                 )}
 
-                {/* --- 2. DOUBT VIEW --- */}
+                {/*DOUBT VIEW*/}
                 {activeTab === 'doubts' && (
                     <div style={styles.sectionCard}>
                         <h3 style={{color: '#38bdf8', marginBottom: '15px'}}>Instant Chapter Help</h3>
@@ -145,7 +145,7 @@ function StudentDashboard() {
                     </div>
                 )}
 
-                {/* --- 3. QUIZZES VIEW --- */}
+                {/*QUIZZES VIEW */}
                 {activeTab === 'quizzes' && (
                     <div style={styles.sectionCard}>
                         <h3 style={{color: '#38bdf8'}}>Available Quizzes</h3>
@@ -158,7 +158,7 @@ function StudentDashboard() {
                     </div>
                 )}
 
-                {/* --- 4. SETTINGS VIEW --- */}
+                {/* SETTINGS VIEW */}
                 {activeTab === 'settings' && (
                     <div style={styles.sectionCard}>
                         <h3 style={{color: '#38bdf8', marginBottom: '20px'}}>Preferences</h3>

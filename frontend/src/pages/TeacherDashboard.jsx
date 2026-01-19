@@ -54,7 +54,7 @@ function TeacherDashboard() {
                     <h1 style={{color: '#fff'}}>Teacher Analytics <span style={{color: '#38bdf8'}}>Control Panel</span></h1>
                 </header>
 
-                {/* --- VIEW 1: OVERVIEW --- */}
+                {/* OVERVIEW */}
                 {view === 'overview' && (
                     <>
                         <div style={styles.topRow}>
@@ -123,7 +123,7 @@ function TeacherDashboard() {
                     </>
                 )}
 
-                {/* --- VIEW 2: LIST --- */}
+                {/* VIEW 2: LIST  */}
                 {view === 'list' && (
                     <div style={styles.sectionCard}>
                         <h3 style={{marginBottom: '20px', color: '#38bdf8'}}>Student Directory</h3>
@@ -148,7 +148,7 @@ function TeacherDashboard() {
                     </div>
                 )}
 
-                {/* --- VIEW 3: PERFORMANCE --- */}
+                {/*PERFORMANCE */}
                 {view === 'performance' && selectedStudent && (
                     <div style={styles.sectionCard}>
                         <button onClick={() => setView('overview')} style={styles.backBtn}>← Back</button>
