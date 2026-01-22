@@ -58,10 +58,10 @@ function StudentDashboard() {
             <nav style={styles.sidebar}>
                 <h2 style={styles.logo}>CORE<span style={{color: '#fff'}}>AI</span></h2>
                 <ul style={styles.navList}>
-                    <li style={activeTab === 'dashboard' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('dashboard')}>🏠 Dashboard</li>
-                    <li style={activeTab === 'doubts' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('doubts')}>💡 Ask Doubts</li>
-                    <li style={activeTab === 'quizzes' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('quizzes')}>🎯 Quizzes</li>
-                    <li style={activeTab === 'settings' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('settings')}>⚙️ Settings</li>
+                    <li style={activeTab === 'dashboard' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('dashboard')}>Dashboard</li>
+                    <li style={activeTab === 'doubts' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('doubts')}>Ask Doubts</li>
+                    <li style={activeTab === 'quizzes' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('quizzes')}>Quizzes</li>
+                    <li style={activeTab === 'settings' ? styles.activeNavItem : styles.navItem} onClick={() => setActiveTab('settings')}>Settings</li>
                 </ul>
                 <button onClick={() => {localStorage.clear(); window.location.href='/';}} style={styles.logoutBtn}>Logout</button>
             </nav>
