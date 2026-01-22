@@ -26,12 +26,12 @@ def get_db():
 
 @app.post("/register")
 def register(user_data: dict, db: Session = Depends(get_db)):
-    # 1. Prevent duplicate emails
+    # Prevent duplicate emails
     existing_user = db.query(models.User).filter(models.User.email == user_data.get("email")).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    # 2. Create the primary User record
+    # Create primary User record
     new_user = models.User(
         name=user_data.get("name"),
         email=user_data.get("email"),
@@ -44,7 +44,7 @@ def register(user_data: dict, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    # 3. Create initial Progress for students 
+    # Create initial Progress for students 
     if new_user.role == "student":
         initial_progress = models.Progress(
             student_id=new_user.id,
@@ -63,14 +63,14 @@ def login(user_data: dict, db: Session = Depends(get_db)):
     
     user = db.query(models.User).filter(models.User.email == email).first()
     
-    # Simple password check (Note: use hashing in production)
+    # Simple password check (for demo purposes only)
     if not user or user.password != password:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     token = auth.create_access_token(data={"sub": user.email, "id": user.id, "role": user.role})
     return {"token": token, "role": user.role}
 
-# --- STUDENT ---
+# STUDENT
 
 @app.get("/student/stats")
 def get_student_stats(token: str, db: Session = Depends(get_db)):
@@ -102,7 +102,7 @@ def ask_ai_doubt(data: dict):
         answer = "I'm looking into that. Why not check your course materials for Chapter 1?"
     return {"answer": answer}
 
-# --- TEACHER ---
+# TEACHER
 
 @app.get("/teacher/analytics")
 def get_teacher_analytics(token: str, db: Session = Depends(get_db)):
@@ -133,7 +133,7 @@ def get_teacher_analytics(token: str, db: Session = Depends(get_db)):
         "students": student_list
     }
 
-# --- PASSWORD RESET ---
+# PASSWORD RESET
 
 @app.post("/forgot-password")
 def forgot_password(data: dict, db: Session = Depends(get_db)):
