@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlalchemy
+python-jose[cryptography]
+bcrypt
+pydantic
+PyPDF2
+faiss-cpu
+sentence-transformers
+ollama
+groq
+python-dotenv
+pdfplumber
+huggingface_hub

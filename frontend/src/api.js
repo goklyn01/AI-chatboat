@@ -21,7 +21,7 @@
 
 import axios from 'axios';
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "http://localhost:9010";
 
 
 export const loginUser = (credentials) => {
@@ -29,7 +29,7 @@ export const loginUser = (credentials) => {
 };
 
 export const registerUser = (userData) => {
-    return axios.post(`${API_BASE}/register`, userData);
+    return axios.post(`${API_BASE}/signup`, userData);
 };
 
 
@@ -48,4 +48,44 @@ export const getTeacherAnalytics = (token) => {
     return axios.get(`${API_BASE}/teacher/analytics`, {
         params: { token: token }
     });
+};
+
+// --- Chat API ---
+
+export const getSubjects = async (token) => {
+    const response = await axios.get(`${API_BASE}/subjects`, {
+        params: { token },
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+export const createSession = async (token, subject, chapter, language) => {
+    const response = await axios.post(`${API_BASE}/sessions`,
+        { subject, chapter, language },
+        { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
+};
+
+export const getSessions = async (token) => {
+    const response = await axios.get(`${API_BASE}/sessions`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+export const getSession = async (token, sessionId) => {
+    const response = await axios.get(`${API_BASE}/sessions/${sessionId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+export const sendMessageToSession = async (token, sessionId, content) => {
+    const response = await axios.post(`${API_BASE}/sessions/${sessionId}/message`,
+        { role: 'user', content },
+        { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
 };

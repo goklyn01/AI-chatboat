@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import PlanSelector from './pages/PlanSelector';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherDashboard from './pages/TeacherDashboard';
+import Chat from './pages/Chat';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/select-plan" element={<PlanSelector />} />
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );

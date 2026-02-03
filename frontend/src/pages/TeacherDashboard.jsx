@@ -10,14 +10,14 @@ function TeacherDashboard() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        axios.get(`http://localhost:8000/teacher/analytics?token=${token}`)
+        axios.get(`http://localhost:9010/teacher/analytics?token=${token}`)
             .then(res => setData(res.data))
             .catch(err => console.error("Error loading analytics", err));
     }, []);
 
     if (!data) return (
-        <div style={{...styles.dashboard, justifyContent: 'center', alignItems: 'center'}}>
-            <h2 style={{color: '#38bdf8'}}>Loading Teacher Analytics...</h2>
+        <div style={{ ...styles.dashboard, justifyContent: 'center', alignItems: 'center' }}>
+            <h2 style={{ color: '#38bdf8' }}>Loading Teacher Analytics...</h2>
         </div>
     );
 
@@ -40,18 +40,18 @@ function TeacherDashboard() {
         <div style={styles.dashboard}>
             {/* Sidebar */}
             <nav style={styles.sidebar}>
-                <h2 style={styles.logo}>CORE<span style={{color: '#fff'}}>AI</span></h2>
+                <h2 style={styles.logo}>CORE<span style={{ color: '#fff' }}>AI</span></h2>
                 <ul style={styles.navList}>
                     <li style={view === 'overview' ? styles.activeNavItem : styles.navItem} onClick={() => setView('overview')}>📊 Class Overview</li>
                     <li style={view === 'list' ? styles.activeNavItem : styles.navItem} onClick={() => setView('list')}>👥 Student List</li>
                 </ul>
-                <button onClick={() => {localStorage.clear(); window.location.href='/';}} style={styles.logoutBtn}>Logout</button>
+                <button onClick={() => { localStorage.clear(); window.location.href = '/'; }} style={styles.logoutBtn}>Logout</button>
             </nav>
 
             {/* Main Content */}
             <main style={styles.mainContent}>
                 <header style={styles.header}>
-                    <h1 style={{color: '#fff'}}>Teacher Analytics <span style={{color: '#38bdf8'}}>Control Panel</span></h1>
+                    <h1 style={{ color: '#fff' }}>Teacher Analytics <span style={{ color: '#38bdf8' }}>Control Panel</span></h1>
                 </header>
 
                 {/* OVERVIEW */}
@@ -65,23 +65,23 @@ function TeacherDashboard() {
                             <div style={styles.statCard}>
                                 <h3 style={styles.cardTitle}>CLASS AVG ACCURACY</h3>
                                 <p style={styles.statValue}>{data.average_accuracy}%</p>
-                                <div style={styles.miniBar}><div style={{...styles.miniFill, width: `${data.average_accuracy}%`}}></div></div>
+                                <div style={styles.miniBar}><div style={{ ...styles.miniFill, width: `${data.average_accuracy}%` }}></div></div>
                             </div>
                         </div>
 
                         <div style={styles.sectionCard}>
                             <div style={styles.filterBar}>
-                                <h3 style={{color: '#38bdf8'}}>Performance Roster</h3>
-                                <div style={{display: 'flex', gap: '10px'}}>
-                                    <input 
-                                        style={styles.input} 
-                                        placeholder="Search name..." 
-                                        value={searchTerm} 
-                                        onChange={(e) => setSearchTerm(e.target.value)} 
+                                <h3 style={{ color: '#38bdf8' }}>Performance Roster</h3>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <input
+                                        style={styles.input}
+                                        placeholder="Search name..."
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
                                     />
-                                    <select 
-                                        style={styles.select} 
-                                        value={selectedClass} 
+                                    <select
+                                        style={styles.select}
+                                        value={selectedClass}
                                         onChange={(e) => setSelectedClass(e.target.value)}
                                     >
                                         {classes.map(c => <option key={c} value={c}>Class {c}</option>)}
@@ -101,14 +101,14 @@ function TeacherDashboard() {
                                 <tbody>
                                     {filteredStudents.map((student) => (
                                         <tr key={student.id} style={styles.tr}>
-                                            <td style={{...styles.td, color: '#38bdf8', cursor: 'pointer', fontWeight: 'bold'}} onClick={() => handleStudentClick(student)}>
+                                            <td style={{ ...styles.td, color: '#38bdf8', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => handleStudentClick(student)}>
                                                 {student.name}
                                             </td>
                                             <td style={styles.td}>{student.class || "N/A"}</td>
                                             <td style={styles.td}>{student.accuracy}%</td>
                                             <td style={styles.td}>
                                                 <span style={{
-                                                    ...styles.statusBadge, 
+                                                    ...styles.statusBadge,
                                                     backgroundColor: student.accuracy < 50 ? '#7f1d1d' : '#064e3b',
                                                     color: student.accuracy < 50 ? '#f87171' : '#34d399'
                                                 }}>
@@ -126,7 +126,7 @@ function TeacherDashboard() {
                 {/* VIEW 2: LIST  */}
                 {view === 'list' && (
                     <div style={styles.sectionCard}>
-                        <h3 style={{marginBottom: '20px', color: '#38bdf8'}}>Student Directory</h3>
+                        <h3 style={{ marginBottom: '20px', color: '#38bdf8' }}>Student Directory</h3>
                         <table style={styles.table}>
                             <thead>
                                 <tr style={styles.tableHeader}>
@@ -152,7 +152,7 @@ function TeacherDashboard() {
                 {view === 'performance' && selectedStudent && (
                     <div style={styles.sectionCard}>
                         <button onClick={() => setView('overview')} style={styles.backBtn}>← Back</button>
-                        <h2 style={{color: '#fff'}}>Report: <span style={{color: '#38bdf8'}}>{selectedStudent.name}</span></h2>
+                        <h2 style={{ color: '#fff' }}>Report: <span style={{ color: '#38bdf8' }}>{selectedStudent.name}</span></h2>
                         <div style={styles.topRow}>
                             <div style={styles.statCard}><h3 style={styles.cardTitle}>ACCURACY</h3><p style={styles.statValue}>{selectedStudent.accuracy}%</p></div>
                             <div style={styles.statCard}><h3 style={styles.cardTitle}>PROGRESS</h3><p style={styles.statValue}>{selectedStudent.chapters} Ch.</p></div>

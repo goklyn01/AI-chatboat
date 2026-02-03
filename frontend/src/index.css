@@ -1,0 +1,680 @@
+:root {
+    /* Gemini Dark Theme Colors */
+    --bg-body: #131314;
+    --bg-sidebar: #1e1f20;
+    --bg-surface: #1e1f20;
+    --bg-surface-hover: #2d2e2f;
+    --bg-input: #1e1f20;
+    --text-primary: #e3e3e3;
+    --text-secondary: #c4c7c5;
+    --accent-blue: #8ab4f8;
+    --accent-blue-hover: #aecbfa;
+    --user-bubble: #282a2c;
+    /* Subtle dark grey */
+    --border-color: #444746;
+
+    /* Layout */
+    --sidebar-width: 280px;
+    --chat-max-width: 800px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Google Sans', 'Roboto', -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Layout --- */
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    border-right: 1px solid transparent;
+    /* Or subtle border if desired */
+    /* Gemini sidebar is often floating or distinct background */
+}
+
+.new-chat-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #282a2c;
+    color: var(--text-primary);
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.new-chat-btn:hover {
+    background-color: #37393b;
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-item {
+    padding: 10px 12px;
+    border-radius: 20px;
+    /* Gemini style pill hover */
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.1s;
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+
+.history-item:hover {
+    background-color: #282a2c;
+}
+
+.history-item.active {
+    background-color: #004a77;
+    color: #c2e7ff;
+}
+
+.history-item.active {
+    background-color: #004a77;
+    color: #c2e7ff;
+}
+
+.section-title {
+    font-size: 12px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.logout-btn {
+    margin-top: auto;
+    padding: 10px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Main Chat Area --- */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--bg-body);
+}
+
+.chat-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center content like Gemini */
+}
+
+.chat-content-width {
+    width: 100%;
+    max-width: var(--chat-max-width);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Messages --- */
+.message-row {
+    display: flex;
+    gap: 16px;
+    line-height: 1.6;
+}
+
+.message-row.user {
+    justify-content: flex-end;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--accent-blue);
+    display: flex;
+    /* Placeholder if image logic added later */
+    flex-shrink: 0;
+}
+
+.message-content {
+    max-width: 80%;
+    font-size: 16px;
+}
+
+/* User Message Bubble */
+.user .message-content {
+    background-color: var(--user-bubble);
+    padding: 10px 18px;
+    border-radius: 20px;
+    border-top-right-radius: 4px;
+}
+
+/* AI Message (Transparent/Text driven) */
+.assistant .message-content {
+    background: transparent;
+    color: var(--text-primary);
+    padding: 0;
+    /* Gemini AI text just flows */
+}
+
+/* Markdown Styles */
+.markdown-body p {
+    margin-bottom: 1rem;
+}
+
+.markdown-body pre {
+    background-color: #282a2c;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.markdown-body code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9em;
+}
+
+/* --- Input Area --- */
+.input-area-wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-body);
+    /* Sticky footer feel */
+}
+
+.input-container {
+    width: 100%;
+    max-width: var(--chat-max-width);
+    background-color: var(--bg-input);
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    /* Vertically center */
+    gap: 10px;
+    border: 1px solid transparent;
+    /* Can add focus border */
+    transition: all 0.2s;
+}
+
+.input-container:focus-within {
+    background-color: var(--bg-surface-hover);
+}
+
+.chat-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    max-height: 150px;
+    padding: 10px 0;
+    font-family: inherit;
+    /* Auto-grow usually needs JS height adj, simpler here */
+    height: 48px;
+    line-height: 28px;
+}
+
+.send-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+}
+
+.send-btn:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* --- Chat Config / Welcome Screen --- */
+.chat-config-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.chat-config-container h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.chat-config-container p {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: #8e918f;
+}
+
+.config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-surface);
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.config-select {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+.config-select:focus {
+    border-color: var(--accent-blue);
+}
+
+.start-chat-btn {
+    background-color: var(--accent-blue);
+    color: #0b2245;
+    /* Dark text for contrast */
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: opacity 0.2s;
+}
+
+.start-chat-btn:hover {
+    opacity: 0.9;
+}
+
+/* --- Login Screen (Gemini Style) --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-body);
+    padding: 20px;
+}
+
+.login-card {
+    background-color: var(--bg-surface);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 28px;
+    /* Rounded like Google cards */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* No shadow for flat dark theme, or subtle one */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h2 {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+}
+
+.tab-button:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.auth-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.auth-form input,
+.auth-form select {
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 4px;
+    /* Google inputs usually roughly rectangular with slight radius */
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    border-color: var(--accent-blue);
+    border-width: 2px;
+    padding: 11px 15px;
+    /* Adjust for border width change */
+}
+
+.auth-form button[type="submit"] {
+    background-color: var(--accent-blue);
+    color: #0b2245;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.auth-form button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+.auth-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.test-credentials {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.error-message {
+    color: #ff8989;
+    font-size: 13px;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* --- Dashboard Styles --- */
+.dashboard-nav-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: var(--accent-blue);
+    letter-spacing: 2px;
+}
+
+.nav-item {
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item.active {
+    background-color: var(--bg-surface);
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+.dashboard-main {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.stat-card-row {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    flex: 1;
+    background-color: var(--bg-surface);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.section-card {
+    background-color: var(--bg-surface);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 10px 0;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.progress-track {
+    height: 4px;
+    background-color: #334155;
+    border-radius: 2px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-blue);
+}
+
+.activity-item {
+    border-left: 2px solid var(--accent-blue);
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.activity-task {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.activity-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* --- Animations --- */
+@keyframes sparkle {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sparkle-anim {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #fff 10%, transparent 10%),
+        radial-gradient(circle, #fff 10%, transparent 10%);
+    background-size: 20% 20%;
+    background-position: 0 0, 50% 50%;
+    animation: sparkle 2s infinite linear;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-color: white;
+    /* Fallback for mask */
+}
+
+/* Simple Gemin-like loader if mask is too complex for CSS-only without assets */
+.sparkle-anim {
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-blue);
+    mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4L14.4 9.6L20 12L14.4 14.4L12 20L9.6 14.4L4 12L9.6 9.6L12 4Z' fill='white'/%3E%3C/svg%3E");
+    mask-size: contain;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+.back-dashboard-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    padding: 8px 16px;
+    background-color: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.back-dashboard-btn:hover {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+}
